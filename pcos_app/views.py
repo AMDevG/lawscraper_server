@@ -4,22 +4,22 @@ from django.http import HttpResponse
 import dryscrape
 import re
 from bs4 import BeautifulSoup
+from openpyxl import Workbook
+import openpyxl as xl
 import sys
 
 def home(request):
-
-	#ids = getIDs()
-	parseTarget()
-
+	write_to_excel()
 	return HttpResponse("Done")
 
 
 def getIDs():
-	#search_ids holds all inmate numbers and is returned 
-	#at end of function
-
 	search_ids = []
 
+	#Scrapes results returned from searching all bookings of day
+	#and retrieves docket numbers.
+	#Returns type list
+	#search_ids holds all inmate numbers and is returned to caller
 	sess = dryscrape.Session()
 	sess.visit('http://www.pcsoweb.com/inmatebooking/')
 
@@ -40,17 +40,19 @@ def getIDs():
 	button.click()
 
 	response = sess.body()
+	#response is the javascript rendered html
+	#after submital button is clicked
+
 	soup = BeautifulSoup(response)
 
 	#Searches for regular expression matching end of id attached
 	#to inmate numbers
+	inmate_numbers = soup.findAll("span", {"id" : re.compile('lblJMSNumber.*')})
+	for num in inmate_numbers:
+		search_ids.append(num.text)
 
-	dates = soup.findAll("span", {"id" : re.compile('lblJMSNumber.*')})
-	for d in dates:
-		search_ids.append(d.text)
-
-	#Passes ids to pull up inmate detail page
 	return search_ids
+	
 
 def get_id_detail():
 	search_ids = getIDs()
@@ -72,7 +74,7 @@ def get_id_detail():
 def parseTarget():
 
 	# detail_date is the main dictionary containing all data for report
-	
+
 	detail_date = {}
 	results = []
 	charge_rows = []
@@ -108,15 +110,15 @@ def parseTarget():
 	alias = soup.find("span", {"id" : 'lblAKA'}).text
 
 
+	#Charge table is separate from other booking data
 
 	charge_table = soup.find("table", id='tblCharges')
 	rows = charge_table.findAll('td')
 	for row in rows:	
 		charge_data.append(row.text)
 
-	
+	#Iterates over every other because of headers
 	for i in range(1, len(charge_data),2):
-		print("i is at", i)
 		if i == 1:
 			detail_date['charge_number'] = charge_data[i]
 		elif i == 3:
@@ -162,13 +164,93 @@ def parseTarget():
 	detail_date['booking_type'] = booking_type
 	detail_date['alias'] = alias
 	
+	return detail_date
+
+def write_to_excel():
+
+	data_rows = ['Name', 'Docket', 'Arrest Date', 'Agency',
+				 'Address', 'City','State','Zipcode','Race',
+				 'Sex', 'Date of Birth', 'Place of Birth', 'Arrest Age',
+				 'Eye Color', 'Hair Color', 'Complexion', 'Height', 
+				 'Weight', 'Cell Location', 'Account Balance', 'SPIN', 'Booking Type',
+				 'Alias']
+
+	detail_data  = parseTarget()
+	target_wb = Workbook()
+	target_ws = target_wb.create_sheet(0)
+	target_ws.title = detail_data['docket']
+
+	for i in range(1,len(data_rows)):
+		target_ws.cell(row = i, column = 1 ).value = data_rows[i]
+
+		if i == 1:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['name'] 
+		elif i == 2:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['docket'] 
+		elif i == 3:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_date'] 		
+		elif i == 4:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['agency'] 
+		elif i == 5:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['address'] 
+		elif i == 6:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['city'] 
+		elif i == 7:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['state'] 
+		elif i == 8:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['zipcode'] 
+		elif i == 9:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['race'] 
+		elif i == 10:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['sex'] 
+		elif i == 11:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['dob'] 
+		elif i == 12:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['pob'] 
+		elif i == 13:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_age'] 
+		elif i == 14:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['eyes'] 
+		elif i == 15:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['hair'] 
+		elif i == 16:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['complexion'] 
+		elif i == 17:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['height'] 
+		elif i == 18:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['weight'] 
+		elif i == 19:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['cell_location'] 
+		elif i == 20:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['account_balance'] 
+		elif i == 21:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['spin'] 
+		elif i == 22:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['booking_type'] 
+		elif i == 23:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['alias'] 
 
 
 
-	for key, val in detail_date.items():
-		print(key,val)
+	workbook_name = "Booking Statement Report.xlsx"
+	target_wb.save("/Users/johnberry/Desktop/"+workbook_name) 
+	print("Wrote workbook")
 
 
 
+
+
+
+	"""
+	import StringIO
+	output = StringIO.StringIO()
+	# read your content and put it in output var
+	out_content = output.getvalue()
+	output.close()
+	response = HttpResponse(out_content, mimetype='application/vnd.ms-excel')
+	response['Content-Disposition'] = 'attachment; filename="test.xls"'
+"""
+	
+	
 
 
