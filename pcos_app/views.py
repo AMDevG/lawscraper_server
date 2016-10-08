@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.core.mail import send_mail, EmailMessage
 import dryscrape
 import re
 from bs4 import BeautifulSoup
@@ -8,14 +8,13 @@ from openpyxl import Workbook
 import openpyxl as xl
 import sys
 
+
 def home(request):
 	write_to_excel()
 	return HttpResponse("Done")
 
-
 def getIDs():
 	search_ids = []
-
 	#Scrapes results returned from searching all bookings of day
 	#and retrieves docket numbers.
 	#Returns type list
@@ -84,7 +83,6 @@ def parseTarget():
 
 	soup = BeautifulSoup(target_html)
 
-	
 	name = soup.find("span", {"id" : 'lblName1'}).text
 	docket = soup.find("span", {"id" : 'lblDocket1'}).text
 	arrest_date = soup.find("span", {"id" : 'lblArrestDate1'}).text
@@ -230,27 +228,11 @@ def write_to_excel():
 		elif i == 23:
 			target_ws.cell(row = i, column = 2 ).value = detail_data['alias'] 
 
-
-
+	##HARDCODED FILE PATH WILL NEED TO POINT TO SERVER PATH
 	workbook_name = "Booking Statement Report.xlsx"
 	target_wb.save("/Users/johnberry/Desktop/"+workbook_name) 
-	print("Wrote workbook")
-
-
-
-
-
-
-	"""
-	import StringIO
-	output = StringIO.StringIO()
-	# read your content and put it in output var
-	out_content = output.getvalue()
-	output.close()
-	response = HttpResponse(out_content, mimetype='application/vnd.ms-excel')
-	response['Content-Disposition'] = 'attachment; filename="test.xls"'
-"""
-	
-	
-
+	mail = EmailMessage("Hello", "testemail", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
+	##HARDCODED FILE PATH WILL NEED TO POINT TO SERVER PATH
+	mail.attach_file("/Users/johnberry/Desktop/Booking Statement Report.xlsx")
+	mail.send()
 
