@@ -171,15 +171,19 @@ def write_to_excel():
 				 'Sex', 'Date of Birth', 'Place of Birth', 'Arrest Age',
 				 'Eye Color', 'Hair Color', 'Complexion', 'Height', 
 				 'Weight', 'Cell Location', 'Account Balance', 'SPIN', 'Booking Type',
-				 'Alias']
+				 'Alias', 'Charge Number', 'Agency Report Number', 'Offense',
+				 'Statute', 'Case Number', 'Bond Assessed', 'Bond Amount Due', 
+				 'Charge Status', 'Arrest Type', 'OBTS']
 
 	detail_data  = parseTarget()
 	target_wb = Workbook()
 	target_ws = target_wb.create_sheet(0)
 	target_ws.title = detail_data['docket']
 
+	target_ws.cell(row = 1, column = 1).value = data_rows[0]
+
 	for i in range(1,len(data_rows)):
-		target_ws.cell(row = i, column = 1 ).value = data_rows[i]
+		target_ws.cell(row = i + 1, column = 1 ).value = data_rows[i]
 
 		if i == 1:
 			target_ws.cell(row = i, column = 2 ).value = detail_data['name'] 
@@ -206,7 +210,7 @@ def write_to_excel():
 		elif i == 12:
 			target_ws.cell(row = i, column = 2 ).value = detail_data['pob'] 
 		elif i == 13:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_age'] 
+			target_ws.cell(row = i , column = 2 ).value = detail_data['arrest_age'] 
 		elif i == 14:
 			target_ws.cell(row = i, column = 2 ).value = detail_data['eyes'] 
 		elif i == 15:
@@ -226,7 +230,49 @@ def write_to_excel():
 		elif i == 22:
 			target_ws.cell(row = i, column = 2 ).value = detail_data['booking_type'] 
 		elif i == 23:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['alias'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['alias']
+		elif i == 24:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['charge_number'] 
+		elif i == 25:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['agency_report_number'] 
+		elif i == 26:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['offense'] 
+		elif i == 27:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['statute'] 
+		elif i == 28:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['case_number']
+		elif i == 29:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['bond_assessed'] 
+		elif i == 30:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['bond_amount_due'] 
+		elif i == 31:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['charge_status'] 
+		elif i == 32:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_type'] 
+		elif i == 33:
+			target_ws.cell(row = i, column = 2 ).value = detail_data['obts'] 
+
+
+
+			"""detail_date['charge_number'] = charge_data[i]
+		elif i == 3:
+			detail_date['agency_report_number'] = charge_data[i]
+		elif i == 5:
+			detail_date['offense'] = charge_data[i]
+		elif i == 7:
+			detail_date['statute'] = charge_data[i]
+		elif i == 9:
+			detail_date['case_number'] = charge_data[i]
+		elif i == 11:
+			detail_date['bond_assessed'] = charge_data[i]
+		elif i == 13:
+			detail_date['bond_amount_due'] = charge_data[i]
+		elif i == 15:
+			detail_date['charge_status'] = charge_data[i]
+		elif i == 17:
+			detail_date['arrest_type'] = charge_data[i]
+		elif i == 19:
+			detail_date['obts'] = charge_data[i]"""
 
 	##HARDCODED FILE PATH WILL NEED TO POINT TO SERVER PATH
 	workbook_name = "Booking Statement Report.xlsx"
