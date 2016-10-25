@@ -51,7 +51,7 @@ def getIDs():
 		search_ids.append(num.text)
 
 	return search_ids
-	
+
 
 def get_id_detail():
 	search_ids = getIDs()
@@ -112,7 +112,7 @@ def parseTarget():
 
 	charge_table = soup.find("table", id='tblCharges')
 	rows = charge_table.findAll('td')
-	for row in rows:	
+	for row in rows:
 		charge_data.append(row.text)
 
 	#Iterates over every other because of headers
@@ -161,7 +161,7 @@ def parseTarget():
 	detail_date['spin'] = spin
 	detail_date['booking_type'] = booking_type
 	detail_date['alias'] = alias
-	
+
 	return detail_date
 
 def write_to_excel():
@@ -169,10 +169,10 @@ def write_to_excel():
 	data_rows = ['Name', 'Docket', 'Arrest Date', 'Agency',
 				 'Address', 'City','State','Zipcode','Race',
 				 'Sex', 'Date of Birth', 'Place of Birth', 'Arrest Age',
-				 'Eye Color', 'Hair Color', 'Complexion', 'Height', 
+				 'Eye Color', 'Hair Color', 'Complexion', 'Height',
 				 'Weight', 'Cell Location', 'Account Balance', 'SPIN', 'Booking Type',
 				 'Alias', 'Charge Number', 'Agency Report Number', 'Offense',
-				 'Statute', 'Case Number', 'Bond Assessed', 'Bond Amount Due', 
+				 'Statute', 'Case Number', 'Bond Assessed', 'Bond Amount Due',
 				 'Charge Status', 'Arrest Type', 'OBTS']
 
 	detail_data  = parseTarget()
@@ -186,71 +186,71 @@ def write_to_excel():
 		target_ws.cell(row = i + 1, column = 1 ).value = data_rows[i]
 
 		if i == 1:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['name'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['name']
 		elif i == 2:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['docket'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['docket']
 		elif i == 3:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_date'] 		
+			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_date']
 		elif i == 4:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['agency'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['agency']
 		elif i == 5:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['address'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['address']
 		elif i == 6:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['city'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['city']
 		elif i == 7:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['state'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['state']
 		elif i == 8:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['zipcode'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['zipcode']
 		elif i == 9:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['race'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['race']
 		elif i == 10:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['sex'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['sex']
 		elif i == 11:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['dob'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['dob']
 		elif i == 12:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['pob'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['pob']
 		elif i == 13:
-			target_ws.cell(row = i , column = 2 ).value = detail_data['arrest_age'] 
+			target_ws.cell(row = i , column = 2 ).value = detail_data['arrest_age']
 		elif i == 14:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['eyes'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['eyes']
 		elif i == 15:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['hair'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['hair']
 		elif i == 16:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['complexion'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['complexion']
 		elif i == 17:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['height'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['height']
 		elif i == 18:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['weight'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['weight']
 		elif i == 19:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['cell_location'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['cell_location']
 		elif i == 20:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['account_balance'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['account_balance']
 		elif i == 21:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['spin'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['spin']
 		elif i == 22:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['booking_type'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['booking_type']
 		elif i == 23:
 			target_ws.cell(row = i, column = 2 ).value = detail_data['alias']
 		elif i == 24:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['charge_number'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['charge_number']
 		elif i == 25:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['agency_report_number'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['agency_report_number']
 		elif i == 26:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['offense'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['offense']
 		elif i == 27:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['statute'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['statute']
 		elif i == 28:
 			target_ws.cell(row = i, column = 2 ).value = detail_data['case_number']
 		elif i == 29:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['bond_assessed'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['bond_assessed']
 		elif i == 30:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['bond_amount_due'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['bond_amount_due']
 		elif i == 31:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['charge_status'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['charge_status']
 		elif i == 32:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_type'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_type']
 		elif i == 33:
-			target_ws.cell(row = i, column = 2 ).value = detail_data['obts'] 
+			target_ws.cell(row = i, column = 2 ).value = detail_data['obts']
 
 
 
@@ -276,7 +276,7 @@ def write_to_excel():
 
 	##HARDCODED FILE PATH WILL NEED TO POINT TO SERVER PATH
 	workbook_name = "Booking Statement Report.xlsx"
-	target_wb.save("/Users/johnberry/Desktop/"+workbook_name) 
+	target_wb.save("/Users/johnberry/Desktop/"+workbook_name)
 	mail = EmailMessage("Hello", "testemail", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
 	##HARDCODED FILE PATH WILL NEED TO POINT TO SERVER PATH
 	mail.attach_file("/Users/johnberry/Desktop/Booking Statement Report.xlsx")
