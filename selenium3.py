@@ -1,3 +1,7 @@
+#LAST OFFENDER IS OVERWRITING THE OTHERS IN THE WORKBOOK
+
+
+
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pcos_site.settings')
 
@@ -47,7 +51,7 @@ def getIDs():
     date_input.send_keys("10/26/2016")
     page_size.select_by_value('100')
 
-    include_charge.click()
+    #include_charge.click()
     search_button.click()
 
     response = driver.page_source
@@ -99,7 +103,8 @@ def get_id_detail(test_id):
 
 def parseTarget():
 
-    detail_date = {}
+
+    master_data = {}
 
 
     # detail_date is the main dictionary containing all data for report
@@ -108,6 +113,7 @@ def parseTarget():
 
     for id_number in search_ids:
 
+        detail_date = {}
     	results = []
     	charge_rows = []
     	charge_data = []
@@ -116,6 +122,8 @@ def parseTarget():
     	soup = BeautifulSoup(target_html)
 
     	name = soup.find("span", {"id" : 'lblName1'}).text
+    	print("oFFENDER IS : ", name)
+
     	docket = soup.find("span", {"id" : 'lblDocket1'}).text
     	arrest_date = soup.find("span", {"id" : 'lblArrestDate1'}).text
     	agency = soup.find("span", {"id" : 'lblAgency'}).text
@@ -194,7 +202,18 @@ def parseTarget():
     	detail_date['booking_type'] = booking_type
     	detail_date['alias'] = alias
 
-    return detail_date
+
+        master_data[docket] = detail_date
+
+
+
+    for val in master_data.iteritems():
+        print(val)
+        print()
+        print()
+
+
+    #return detail_date
 
 def write_to_excel():
 
