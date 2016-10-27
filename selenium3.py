@@ -1,7 +1,4 @@
-#LAST OFFENDER IS OVERWRITING THE OTHERS IN THE WORKBOOK
-
-
-
+import sys
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pcos_site.settings')
 
@@ -9,46 +6,38 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail, EmailMessage
 
+from datetime import date
 import re
 from bs4 import BeautifulSoup
-from openpyxl import Workbook
 import openpyxl as xl
-import sys
+from openpyxl import Workbook
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from pyvirtualdisplay import Display
 
-
-
 def getIDs():
+    search_ids = []
+    day_today = date.today()
+    day_today = str(day_today)
+
+    year = str(day_today[0:4])
+    mo = str(day_today[5:7])
+    day = str(day_today[8:11])
+
+    day_today = mo+"/"+day+"/"+year
+
 
     display = Display(visible=0, size=(800,600))
     display.start()
     driver = webdriver.Firefox()
 
-    search_ids = []
-    	#Scrapes results returned from searching all bookings of day
-    	#and retrieves docket numbers.
-    	#Returns type list
-    	#search_ids holds all inmate numbers and is returned to caller
-
-
-    	#Selects submit button, check include, and results per page
-    	#Include charge must be selected to avoid clicking error since
-    	#calendar dropdown covers button when selected
-
     driver.get('http://www.pcsoweb.com/InmateBooking/')
-
     date_input = driver.find_element_by_id("txtBookingDate")
     search_button = driver.find_element_by_id("btnSearch")
     page_size = Select(driver.find_element_by_id("drpPageSize"))
-    #include_charge = driver.find_element_by_id("chkIncludeCharge")
 
-    #INCLUDE CHARGE YIELDS MULTIPLE RESULTS FOR SAME IDS
-    #NOT INCLUDING YIELDS MULTIPLE TABLES IN RESULTS TAB
-
-
-    date_input.send_keys("10/26/2016")
+    date_input.send_keys(day_today)
     page_size.select_by_value('100')
 
     #include_charge.click()
@@ -64,7 +53,7 @@ def getIDs():
     for num in inmate_numbers:
     	search_ids.append(num.text)
 
-    print("Finished running! Here's the inmate numbers")
+    #print("Finished running! Here's the inmate numbers")
 
     driver.quit()
     display.stop()
@@ -84,12 +73,8 @@ def get_id_detail(test_id):
 
 	#test_id = search_ids[0]	#Using first element as test id, will need to create loop
     test_id = test_id
-    print("Id Test is ", test_id)
-
     base_url = 'http://www.pcsoweb.com/inmatebooking/SubjectResults.aspx?id='
     target_url = base_url + test_id
-
-    print target_url
 
     #print("About to visit  ", target_url)
     driver.get(target_url)
@@ -103,12 +88,7 @@ def get_id_detail(test_id):
 
 def parseTarget():
 
-
     master_data = {}
-
-
-    # detail_date is the main dictionary containing all data for report
-
     search_ids = getIDs()
 
     for id_number in search_ids:
@@ -159,6 +139,7 @@ def parseTarget():
     	for i in range(1, len(charge_data),2):
     		if i == 1:
     			detail_date['charge_number'] = charge_data[i]
+    			print("Grabbing charge number ", detail_date['charge_number'])
     		elif i == 3:
     			detail_date['agency_report_number'] = charge_data[i]
     		elif i == 5:
@@ -206,18 +187,17 @@ def parseTarget():
         master_data[docket] = detail_date
 
 
-
     for val in master_data.iteritems():
         print(val)
         print()
         print()
 
-
-    #return detail_date
+    return master_data
 
 def write_to_excel():
 
 
+### Data ROWS NEEDS TO BE DYNAMIC
 
     data_rows = ['Name', 'Docket', 'Arrest Date', 'Agency',
     			 'Address', 'City','State','Zipcode','Race',
@@ -229,97 +209,91 @@ def write_to_excel():
     			 'Charge Status', 'Arrest Type', 'OBTS']
 
     detail_data  = parseTarget()
-
     target_wb = Workbook()
 
     for key in detail_data.keys():
         target_ws = target_wb.create_sheet()
-        target_ws.title = detail_data['docket']
-
+        target_ws.title = key
     	target_ws.cell(row = 1, column = 1).value = data_rows[0]
 
     	for i in range(1,len(data_rows)):
     		target_ws.cell(row = i + 1, column = 1 ).value = data_rows[i]
 
     		if i == 1:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['name']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['name']
+    			print("Made it to master data here is name: ", detail_data[key]['name'])
     		elif i == 2:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['docket']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['docket']
     		elif i == 3:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_date']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['arrest_date']
     		elif i == 4:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['agency']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['agency']
     		elif i == 5:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['address']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['address']
     		elif i == 6:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['city']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['city']
     		elif i == 7:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['state']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['state']
     		elif i == 8:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['zipcode']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['zipcode']
     		elif i == 9:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['race']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['race']
     		elif i == 10:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['sex']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['sex']
     		elif i == 11:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['dob']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['dob']
     		elif i == 12:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['pob']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['pob']
     		elif i == 13:
-    			target_ws.cell(row = i , column = 2 ).value = detail_data['arrest_age']
+    			target_ws.cell(row = i , column = 2 ).value = detail_data[key]['arrest_age']
     		elif i == 14:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['eyes']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['eyes']
     		elif i == 15:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['hair']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['hair']
     		elif i == 16:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['complexion']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['complexion']
     		elif i == 17:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['height']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['height']
     		elif i == 18:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['weight']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['weight']
     		elif i == 19:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['cell_location']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['cell_location']
     		elif i == 20:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['account_balance']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['account_balance']
     		elif i == 21:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['spin']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['spin']
     		elif i == 22:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['booking_type']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['booking_type']
     		elif i == 23:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['alias']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['alias']
     		elif i == 24:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['charge_number']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['charge_number']
     		elif i == 25:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['agency_report_number']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['agency_report_number']
     		elif i == 26:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['offense']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['offense']
     		elif i == 27:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['statute']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['statute']
     		elif i == 28:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['case_number']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['case_number']
     		elif i == 29:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['bond_assessed']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['bond_assessed']
     		elif i == 30:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['bond_amount_due']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['bond_amount_due']
     		elif i == 31:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['charge_status']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['charge_status']
     		elif i == 32:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['arrest_type']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['arrest_type']
     		elif i == 33:
-    			target_ws.cell(row = i, column = 2 ).value = detail_data['obts']
+    			target_ws.cell(row = i, column = 2 ).value = detail_data[key]['obts']
+
     workbook_name = "Booking Statement Report.xlsx"
     target_wb.save("/home/lawscraper/reports/"+workbook_name)
     email_attachment()
 
-	##HARDCODED FILE PATH WILL NEED TO POINT TO SERVER PATH
-
-
 def email_attachment():
 
-
-
     mail = EmailMessage("Hello", "testemail", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
-    ##HARDCODED FILE PATH WILL NEED TO POINT TO SERVER PATH
     mail.attach_file("/home/lawscraper/reports/Booking Statement Report.xlsx")
     mail.send()
     print("sent mail!")
