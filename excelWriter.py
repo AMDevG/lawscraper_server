@@ -16,7 +16,7 @@ def write_to_excel(detail_data):
     			 'Weight', 'Markings', 'Cell Location', 'Account Balance', 'SPIN', 'Booking Type',
     			 'Alias', 'Charge Number', 'Agency Report Number', 'Offense',
     			 'Statute', 'Case Number', 'Bond Assessed', 'Bond Amount Due',
-    			 'Charge Status', 'Arrest Type', 'OBTS',"RANDOM_STRING"]
+    			 'Charge Status', 'Arrest Type', 'OBTS',"-"]
 
     for key in detail_data.keys():
         target_ws = target_wb.create_sheet()
@@ -187,7 +187,6 @@ def write_to_excel(detail_data):
             	    target_ws.cell(row = i, column = 2 ).value = "-"
             elif i == 33:
                 try:
-                    print("Counter at ", i)
                     target_ws.cell(row = i, column = 2 ).value = detail_data[key]['arrest_type']
             	except:
             	    target_ws.cell(row = i, column = 2 ).value = "-"

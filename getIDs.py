@@ -20,7 +20,7 @@ def getIDs():
     day = str(day_today[8:11])
 
     #day_today = mo+"/"+day+"/"+year
-    day_today = "10/27/2016"
+    day_today = "10/31/2016"
 
     display = Display(visible=0, size=(800,600))
     display.start()
