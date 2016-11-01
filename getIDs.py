@@ -60,8 +60,8 @@ def get_id_detail():
 
     test_ids = getIDs()
     
-    test_ids = []
-    test_ids.append("1698579")
+    # test_ids = []
+    # test_ids.append("1698579")
 
     display = Display(visible=0, size=(800,600))
     display.start()

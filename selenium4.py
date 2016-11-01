@@ -24,8 +24,8 @@ def email_attachment():
 def main():
     html_pages = getIDs.runParser()
     arrest_data = parseTargetID.parseTarget(html_pages)
-    #excelWriter.write_to_excel(arrest_data)
-    #email_attachment()
+    excelWriter.write_to_excel(arrest_data)
+    email_attachment()
 
 main()
 

@@ -108,10 +108,6 @@ def parseTarget(html_pages):
             elif i == 19:
             	detail_date['obts'] = charge_data[i]
 
-            
-
-        
-
 
         if len(charge_data) > 19:
             number_of_charges = len(charge_data)/21
@@ -581,17 +577,5 @@ def parseTarget(html_pages):
     length = int(stop - start)
     print("It took this long to process IDs in parsetarget : ", length)
 
-    print("Here is the master_data:    ")
-
-    print
-    print
-
-    for key in master_data.keys():
-        dic = master_data[key]
-        for key in dic.keys():
-            print key
-        print 
-
-    print("Charge Key counter at " , charge_key_counter)
     return master_data
 

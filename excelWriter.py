@@ -16,7 +16,15 @@ def write_to_excel(detail_data):
     			 'Weight', 'Markings', 'Cell Location', 'Account Balance', 'SPIN', 'Booking Type',
     			 'Alias', 'Charge Number', 'Agency Report Number', 'Offense',
     			 'Statute', 'Case Number', 'Bond Assessed', 'Bond Amount Due',
-    			 'Charge Status', 'Arrest Type', 'OBTS',"-"]
+    			 'Charge Status', 'Arrest Type', 'OBTS',  'Charge Number 2', 'Agency Report Number 2', 'Offense 2',
+                 'Statute 2', 'Case Number 2', 'Bond Assessed 2', 'Bond Amount Due 2',
+                 'Charge Status 2', 'Arrest Type 2', 'OBTS 2', 'Charge Number 3', 'Agency Report Number 3', 'Offense 3',
+                 'Statute 3', 'Case Number 3', 'Bond Assessed 3', 'Bond Amount Due 3',
+                 'Charge Status 3', 'Arrest Type 3', 'OBTS 3',  'Charge Number 4', 'Agency Report Number 4', 'Offense 4',
+                 'Statute 4', 'Case Number 4', 'Bond Assessed 4', 'Bond Amount Due 4',
+                 'Charge Status 4', 'Arrest Type 4', 'OBTS 4',  'Charge Number 5', 'Agency Report Number 5', 'Offense 5',
+                 'Statute 5', 'Case Number 5', 'Bond Assessed 5', 'Bond Amount Due 5',
+                 'Charge Status 5', 'Arrest Type 5', 'OBTS 5',  "-"]
 
 
     target_ws = target_wb.create_sheet()
@@ -157,11 +165,14 @@ def write_to_excel(detail_data):
                 	target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['alias']
             	except:
             	    target_ws.cell(row = i, column = col_counter ).value = "-"
+
+
+
             elif i == 25:
                 try:
                     target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number']  ### BEGIN IF CHARGE DATA
                 except KeyError:
-                    target_ws.cell(row = i, column = col_counter ).value = "1"
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
             elif i == 26:
                 try:
                     target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['agency_report_number']
@@ -207,6 +218,220 @@ def write_to_excel(detail_data):
                     target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['obts']
             	except:
             	    target_ws.cell(row = i, column = col_counter ).value = "-"
+
+
+        ##### CHARGE 2 ######
+            elif i == 35:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number2']  ### BEGIN IF CHARGE DATA
+                except KeyError:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 36:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['agency_report_number2']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 37:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['offense2']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 38:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['statute2']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 39:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['case_number2']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 40:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['bond_assessed2']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 41:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['bond_amount_due2']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 42:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_status2']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 43:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['arrest_type2']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 44:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['obts2']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+
+        ### CHARGE 3 #####
+
+            elif i == 45:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number3']  ### BEGIN IF CHARGE DATA
+                except KeyError:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 46:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['agency_report_number3']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 47:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['offense3']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 48:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['statute3']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 49:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['case_number3']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 50:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['bond_assessed3']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 51:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['bond_amount_due3']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 52:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_status3']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 53:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['arrest_type3']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 54:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['obts3']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+
+
+            ##### CHARGE 4 ####
+
+            elif i == 55:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number4']  ### BEGIN IF CHARGE DATA
+                except KeyError:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 56:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['agency_report_number4']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 57:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['offense4']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 58:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['statute4']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 59:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['case_number4']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 60:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['bond_assessed4']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 61:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['bond_amount_due4']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 62:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_status4']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 63:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['arrest_type4']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 64:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['obts4']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+
+        ##### CHARGE 5 #####
+
+
+            elif i == 65:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number5']  ### BEGIN IF CHARGE DATA
+                except KeyError:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 66:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['agency_report_number5']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 67:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['offense5']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 68:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['statute5']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 69:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['case_number5']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 70:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['bond_assessed5']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 71:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['bond_amount_due5']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 72:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_status5']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 73:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['arrest_type5']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
+            elif i == 74:
+                try:
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['obts5']
+                except:
+                    target_ws.cell(row = i, column = col_counter ).value = "-"
 
     stop = time.time()
     length = int(stop-start)
