@@ -24,7 +24,7 @@ def getIDs():
 
     display = Display(visible=0, size=(800,600))
     display.start()
-    driver = webdriver.Firefox()
+    driver = webdriver.Chrome()
 
     driver.get('http://www.pcsoweb.com/InmateBooking/')
     date_input = driver.find_element_by_id("txtBookingDate")
@@ -61,7 +61,7 @@ def get_id_detail():
     test_ids = getIDs()
     display = Display(visible=0, size=(800,600))
     display.start()
-    driver = webdriver.Firefox()
+    driver = webdriver.Chrome()
 
     for ID in test_ids:
         base_url = 'http://www.pcsoweb.com/inmatebooking/SubjectResults.aspx?id='
