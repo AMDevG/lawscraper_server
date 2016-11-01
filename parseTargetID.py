@@ -110,6 +110,7 @@ def parseTarget(html_pages):
 
             
 
+        
 
 
         if len(charge_data) > 19:
@@ -120,7 +121,10 @@ def parseTarget(html_pages):
 
             if number_of_charges == 2:
 
-                for i in range(22, 40,2):
+                i = 22
+
+                while i < 41:
+
                     if i == 22:
                         key = 'charge_number' + str(charge_key_counter)
                         detail_date[key] = charge_data[i]
@@ -161,21 +165,27 @@ def parseTarget(html_pages):
 
                         charge_key_counter+=1
 
+                    i += 2
+
 
 
             elif number_of_charges == 3:
 
+                i = 22
 
-                for i in range(22, 62,2):
+                while i < 62:
 
                     if i == 22:
                         key = 'charge_number' + str(charge_key_counter)
+                        print("In second charge : Here is the number ", charge_key_counter)
                         detail_date[key] = charge_data[i]
                     elif i == 24:
                         key  = 'agency_report_number' + str(charge_key_counter)
                         detail_date[key] = charge_data[i]
                     elif i == 26:
                         key  = 'offense' + str(charge_key_counter)
+                        print("here is the sec offense and key : ", key)
+                        print(charge_data[i])
                         detail_date[key] = charge_data[i]
                     elif i == 28:
                         key  = 'statute' + str(charge_key_counter)
@@ -210,16 +220,25 @@ def parseTarget(html_pages):
 
                         print("Just increased key counter ", charge_key_counter)
 
+                        i = 41
+
+                        print ("I is at ", i)
+
+        
                     elif i == 43:
+                        print("i is at ", i)
+
                         key = 'charge_number' + str(charge_key_counter)
                         print ("Third charge num should be Charge_number3")
                         print ("It is ", key)
+
                         detail_date[key] = charge_data[i]
                     elif i == 45:
                         key  = 'agency_report_number' + str(charge_key_counter)
                         detail_date[key] = charge_data[i]
                     elif i == 47:
                         key  = 'offense' + str(charge_key_counter)
+                        print("here is 3rd offense ", charge_data[i])
                         detail_date[key] = charge_data[i]
                     elif i == 49:
                         key  = 'statute' + str(charge_key_counter)
@@ -249,12 +268,15 @@ def parseTarget(html_pages):
                         detail_date['obts'] = charge_data[i]
 
                         charge_key_counter += 1
+
+                    i += 2
+                    print i 
 
             elif number_of_charges == 4:
 
-               
+                i = 22
 
-                for i in range(22, 83,2):
+                while i < 83:
 
                     if i == 22:
                         key = 'charge_number' + str(charge_key_counter)
@@ -296,6 +318,8 @@ def parseTarget(html_pages):
 
                         charge_key_counter+=1
 
+                        i = 41
+
                     elif i == 43:
                         key = 'charge_number' + str(charge_key_counter)
                         detail_date[key] = charge_data[i]
@@ -334,6 +358,7 @@ def parseTarget(html_pages):
 
                         charge_key_counter += 1
 
+                        i = 62
 
                     if i == 64:
                         key = 'charge_number' + str(charge_key_counter)
@@ -374,13 +399,14 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
 
                         charge_key_counter+= 1
+
+                    i += 2
 
             elif number_of_charges == 5:
 
-               
-
-                for i in range(22, 104,2):
-
+                i = 22
+    
+                while i < 104:
 
                     if i == 22:
                         key = 'charge_number' + str(charge_key_counter)
@@ -422,6 +448,8 @@ def parseTarget(html_pages):
 
                         charge_key_counter+=1
 
+                        i = 41
+
                     elif i == 43:
                         key = 'charge_number' + str(charge_key_counter)
                         detail_date[key] = charge_data[i]
@@ -459,6 +487,8 @@ def parseTarget(html_pages):
                         detail_date['obts'] = charge_data[i]
 
                         charge_key_counter += 1
+
+                        i = 62
 
 
                     if i == 64:
@@ -500,6 +530,8 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
 
                         charge_key_counter+= 1
+
+                        i = 83
 
 
                     if i == 85:
@@ -541,6 +573,7 @@ def parseTarget(html_pages):
                       
                         detail_date[key] = charge_data[i]
 
+                    i +=2
 
         master_data[docket] = detail_date
 
