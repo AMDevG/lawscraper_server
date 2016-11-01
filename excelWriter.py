@@ -32,7 +32,7 @@ def write_to_excel(detail_data):
 
 
     for key in detail_data.keys():
-        
+
         col_counter +=1
 
         for i in range(1,len(data_rows)):
@@ -159,7 +159,7 @@ def write_to_excel(detail_data):
             	    target_ws.cell(row = i, column = col_counter ).value = "-"
             elif i == 25:
                 try:
-                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number']
+                    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number']  ### BEGIN IF CHARGE DATA
                 except KeyError:
                     target_ws.cell(row = i, column = col_counter ).value = "1"
             elif i == 26:
