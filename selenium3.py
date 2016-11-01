@@ -29,7 +29,7 @@ def getIDs():
     day = str(day_today[8:11])
 
     #day_today = mo+"/"+day+"/"+year
-    day_today = "10/27/2016"
+    day_today = "10/29/2016"
 
     display = Display(visible=0, size=(800,600))
     display.start()
@@ -40,15 +40,20 @@ def getIDs():
     search_button = driver.find_element_by_id("btnSearch")
     page_size = Select(driver.find_element_by_id("drpPageSize"))
 
+
     date_input.send_keys(day_today)
     page_size.select_by_value('100')
     search_button.click()
+
+    sort_selection = Select(driver.find_element_by_id("drpSortBy"))
+    sort_selection.select_by_value('Docket')
 
     response = driver.page_source
     soup = BeautifulSoup(response)
     inmate_numbers = soup.findAll("span", {"id" : re.compile('lblJMSNumber.*')})
 
     for num in inmate_numbers:
+        print("Most recent arrest is : ", inmate_numbers[0])
     	search_ids.append(num.text)
 
     driver.quit()
@@ -89,14 +94,14 @@ def parseTarget():
 
     ######### TEST CODE #######
     test_ids = []
-    test_ids.append("1698136")
+    test_ids.append("1698435")
 
     print("test id is ")
 
 
     print("Starting to process # ids", len(test_ids))
 
-    for id_number in search_ids:    #use testids for test code
+    for id_number in test_ids:    #use testids for test code
         detail_date = {}
     	results = []
     	charge_rows = []
@@ -164,14 +169,15 @@ def parseTarget():
 
     	charge_table = soup.find("table", id='tblCharges')
     	rows = charge_table.findAll('td')
-        #### CHECK LENGTH OF CHARGE DATA IF GREATER THAN 19 MULTIPLE CHARGES
+
     	for row in rows:
-    		charge_data.append(row.text)
-    		print(row)
-        print("Here are the items in charge data: ")
-        # for item in charge_data:
-        #     print(str(item))
-    	#Iterates over every other because of headers
+            charge_data.append(row.text)
+
+    	if len(charge_data) > 19:
+    	    number_of_charges = len(charge_data)/21
+
+    	    print("The Offender has : " + str(number_of_charges) + " charges")
+
     	for i in range(1, len(charge_data),2):
             if i == 1:
                 print("In charge_table counter is ", i)
@@ -233,7 +239,7 @@ def write_to_excel():
     			 'Weight', 'Markings', 'Cell Location', 'Account Balance', 'SPIN', 'Booking Type',
     			 'Alias', 'Charge Number', 'Agency Report Number', 'Offense',
     			 'Statute', 'Case Number', 'Bond Assessed', 'Bond Amount Due',
-    			 'Charge Status', 'Arrest Type', 'OBTS',"RANDOM_STRING"]
+    			 'Charge Status', 'Arrest Type', 'OBTS',"-"]
 
     print("Length of data headers is", len(data_rows))
     print("Calling parsetarget...")
@@ -445,9 +451,9 @@ def write_to_excel():
     email_attachment()
 
 def email_attachment():
-    mail = EmailMessage("New Booking Report Statement", "testemail", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
-    mail.attach_file("/home/lawscraper/reports/Booking Statement Report.xlsx")
-    mail.send()
+    #mail = EmailMessage("New Booking Report Statement", "testemail", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
+    #mail.attach_file("/home/lawscraper/reports/Booking Statement Report.xlsx")
+    #mail.send()
     print("sent mail!")
 
 
