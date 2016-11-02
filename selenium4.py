@@ -1,19 +1,10 @@
-import sys
 import os
-import time
-
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pcos_site.settings')
+from django.core.mail import send_mail, EmailMessage
 
 import getIDs
 import parseTargetID
 import excelWriter
-
-from parseTargetID import parseTarget
-from getIDs import runParser
-from excelWriter import write_to_excel
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pcos_site.settings')
-from django.core.mail import send_mail, EmailMessage
-
 
 def email_attachment():
     mail = EmailMessage("New Booking Report Statement", "testemail", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
@@ -22,7 +13,9 @@ def email_attachment():
     print("sent mail!")
 
 def error_handler():
-	mail = EmailMessage("PCSO SCRAPE ERROR", "There was an error check the program", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
+	mail = EmailMessage("PCSO SCRAPE ERROR", "There was an error check the program! Try again", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
+	mail.send()
+	print("Sent error Mail!")
 
 
 def main():

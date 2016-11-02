@@ -1,13 +1,7 @@
-import openpyxl as xl
 from openpyxl import Workbook
 from openpyxl.cell import get_column_letter
-import time
-
 
 def write_to_excel(detail_data):
-
-    print("WRITING TO EXCEL")
-    start = time.time()
 
     target_wb = Workbook()
     data_rows = ['Name', 'Docket', 'Arrest Date', 'Agency',
@@ -27,7 +21,6 @@ def write_to_excel(detail_data):
                  'Statute 5', 'Case Number 5', 'Bond Assessed 5', 'Bond Amount Due 5',
                  'Charge Status 5', 'Arrest Type 5', 'OBTS 5',  "-"]
 
-
     target_ws = target_wb.create_sheet()
     target_ws.title = "Arrest Data"
 
@@ -35,30 +28,18 @@ def write_to_excel(detail_data):
         col_letter = get_column_letter(i)
         target_ws.column_dimensions[col_letter].width = 20
 
-    for col in target_ws.columns:
-        print col
-        target_ws.column_dimensions[col].width = 100
-
     counter = 1
     for item in data_rows:
         target_ws.cell(row = counter, column = 1).value = item
         counter+=1
 
-
     col_counter = 1
-
-
     for key in detail_data.keys():
-
         col_counter +=1
-
         for i in range(1,len(data_rows)):
-
             if i == 1:
                 try:
             	    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['name']
-
-                    print("Writing the name : ", detail_data[key]['name'])
                 except:
             	    target_ws.cell(row = i, column = col_counter ).value = "-"
             elif i == 2:
@@ -176,9 +157,6 @@ def write_to_excel(detail_data):
                 	target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['alias']
             	except:
             	    target_ws.cell(row = i, column = col_counter ).value = "-"
-
-
-
             elif i == 25:
                 try:
                     target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number']  ### BEGIN IF CHARGE DATA
@@ -229,7 +207,6 @@ def write_to_excel(detail_data):
                     target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['obts']
             	except:
             	    target_ws.cell(row = i, column = col_counter ).value = "-"
-
 
         ##### CHARGE 2 ######
             elif i == 35:
@@ -284,7 +261,6 @@ def write_to_excel(detail_data):
                     target_ws.cell(row = i, column = col_counter ).value = "-"
 
         ### CHARGE 3 #####
-
             elif i == 45:
                 try:
                     target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number3']  ### BEGIN IF CHARGE DATA
@@ -336,9 +312,7 @@ def write_to_excel(detail_data):
                 except:
                     target_ws.cell(row = i, column = col_counter ).value = "-"
 
-
             ##### CHARGE 4 ####
-
             elif i == 55:
                 try:
                     target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number4']  ### BEGIN IF CHARGE DATA
@@ -391,8 +365,6 @@ def write_to_excel(detail_data):
                     target_ws.cell(row = i, column = col_counter ).value = "-"
 
         ##### CHARGE 5 #####
-
-
             elif i == 65:
                 try:
                     target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['charge_number5']  ### BEGIN IF CHARGE DATA
@@ -443,10 +415,6 @@ def write_to_excel(detail_data):
                     target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['obts5']
                 except:
                     target_ws.cell(row = i, column = col_counter ).value = "-"
-
-    stop = time.time()
-    length = int(stop-start)
-    print("Writing portion of writeXL took  ", length)
 
     workbook_name = "Booking Statement Report.xlsx"
     target_wb.save("/home/lawscraper/reports/"+workbook_name)
