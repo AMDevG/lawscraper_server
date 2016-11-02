@@ -1,5 +1,6 @@
 import openpyxl as xl
 from openpyxl import Workbook
+from openpyxl.cell import get_column_letter
 import time
 
 
@@ -29,6 +30,14 @@ def write_to_excel(detail_data):
 
     target_ws = target_wb.create_sheet()
     target_ws.title = "Arrest Data"
+
+    for i in range(1, 101):
+        col_letter = get_column_letter(i)
+        target_ws.column_dimensions[col_letter].width = 20
+
+    for col in target_ws.columns:
+        print col
+        target_ws.column_dimensions[col].width = 100
 
     counter = 1
     for item in data_rows:
