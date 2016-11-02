@@ -1,4 +1,4 @@
-from datetime import date
+import datetime
 import re
 import time
 from bs4 import BeautifulSoup
@@ -13,20 +13,26 @@ def getIDs():
     start = time.time()
     search_ids = []
 
-    day_today = date.today()
+    x = datetime.datetime.now()
+    print("Current time : ", x)
+
+    day_today = x - datetime.timedelta(hours=7)
+
     day_today = str(day_today)
+    print("time change: ", day_today)
+
     year = str(day_today[0:4])
     mo = str(day_today[5:7])
-    day = str(day_today[8:11])
+    day = str(day_today[8:10])
 
     day_today = mo+"/"+day+"/"+year
 
-    print("Gathering for this day: ", day_today)
+    #print("Gathering for this day: ", day_today)
     #day_today = "10/31/2016"
 
     display = Display(visible=0, size=(800,600))
     display.start()
-    driver = webdriver.Chrome()
+    driver = webdriver.Firefox()
 
     driver.get('http://www.pcsoweb.com/InmateBooking/')
 
@@ -78,21 +84,19 @@ def get_id_detail():
     html_dict = {}
 
     test_ids = getIDs()
-<<<<<<< HEAD
+
 
     print("Gathered test_ids : ")
     for i in test_ids:
         print i
 
-=======
-    
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
+
     # test_ids = []
     # test_ids.append("1698579")
 
     display = Display(visible=0, size=(800,600))
     display.start()
-    driver = webdriver.Chrome()
+    driver = webdriver.Firefox()
 
     for ID in test_ids:
         base_url = 'http://www.pcsoweb.com/inmatebooking/SubjectResults.aspx?id='

@@ -29,11 +29,7 @@ def write_to_excel(detail_data):
 
     target_ws = target_wb.create_sheet()
     target_ws.title = "Arrest Data"
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
     counter = 1
     for item in data_rows:
         target_ws.cell(row = counter, column = 1).value = item
@@ -52,12 +48,9 @@ def write_to_excel(detail_data):
             if i == 1:
                 try:
             	    target_ws.cell(row = i, column = col_counter ).value = detail_data[key]['name']
-<<<<<<< HEAD
+
                     print("Writing the name : ", detail_data[key]['name'])
                 except:
-=======
-            	except:
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
             	    target_ws.cell(row = i, column = col_counter ).value = "-"
             elif i == 2:
                 try:
@@ -447,4 +440,4 @@ def write_to_excel(detail_data):
     print("Writing portion of writeXL took  ", length)
 
     workbook_name = "Booking Statement Report.xlsx"
-    target_wb.save("/Users/johnberry/Desktop/BookingStatementReports/"+workbook_name)
+    target_wb.save("/home/lawscraper/reports/"+workbook_name)

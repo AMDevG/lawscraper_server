@@ -76,20 +76,9 @@ def parseTarget(html_pages):
     	rows = charge_table.findAll('td')
 
         #### CHECK LENGTH OF CHARGE DATA IF GREATER THAN 19 MULTIPLE CHARGES
-        counter = 0
+
     	for row in rows:
     		charge_data.append(row.text)
-
-<<<<<<< HEAD
-=======
-
-        for item in charge_data:
-            print(str(counter) + "  " +item)
-            print()
-
-            counter += 1
-
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
 
     	for i in range(1, len(charge_data),2):
             if i == 1:
@@ -116,7 +105,7 @@ def parseTarget(html_pages):
 
         if len(charge_data) > 19:
             number_of_charges = len(charge_data)/21
-            print("The Offender has : " + str(number_of_charges) + " charges")
+
 
             charge_key_counter = 2
 
@@ -137,7 +126,6 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 28:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
 
                         detail_date[key] = charge_data[i]
                     elif i == 30:
@@ -163,33 +151,31 @@ def parseTarget(html_pages):
                     elif i == 40:
                         key  = 'obts' + str(charge_key_counter)
 
-=======
-                      
+
                         detail_date[key] = charge_data[i]
                     elif i == 30:
                         key  = 'case_number' + str(charge_key_counter)
-                      
+
                         detail_date[key] = charge_data[i]
                     elif i == 32:
                         key  = 'bond_assessed' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 34:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 36:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 38:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
+
                         detail_date[key] = charge_data[i]
                     elif i == 40:
                         key  = 'obts' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
+
                         detail_date[key] = charge_data[i]
 
                         charge_key_counter+=1
@@ -218,7 +204,6 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 28:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
 
                         detail_date[key] = charge_data[i]
                     elif i == 30:
@@ -244,33 +229,30 @@ def parseTarget(html_pages):
                     elif i == 40:
                         key  = 'obts' + str(charge_key_counter)
 
-=======
-                      
+
                         detail_date[key] = charge_data[i]
                     elif i == 30:
                         key  = 'case_number' + str(charge_key_counter)
-                      
+
                         detail_date[key] = charge_data[i]
                     elif i == 32:
                         key  = 'bond_assessed' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 34:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 36:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 38:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
+
                         detail_date[key] = charge_data[i]
                     elif i == 40:
                         key  = 'obts' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
 
                         charge_key_counter+=1
@@ -279,15 +261,8 @@ def parseTarget(html_pages):
 
                         i = 41
 
-                        print ("I is at ", i)
 
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                     elif i == 43:
-                        print("i is at ", i)
 
                         key = 'charge_number' + str(charge_key_counter)
                         print ("Third charge num should be Charge_number3")
@@ -303,63 +278,42 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 49:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
-
                         detail_date[key] = charge_data[i]
                     elif i == 51:
                         key  = 'case_number' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 53:
                         key  = 'bond_assessed' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 55:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 57:
                         key  = 'charge_status' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 59:
                         key  = 'arrest_type' + str(charge_key_counter)
-
-=======
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 51:
                         key  = 'case_number' + str(charge_key_counter)
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 53:
                         key  = 'bond_assessed' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 55:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 57:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 59:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
                     elif i == 61:
                         detail_date['obts'] = charge_data[i]
-
                         charge_key_counter += 1
 
                     i += 2
-<<<<<<< HEAD
-                    print i
-=======
-                    print i 
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
 
             elif number_of_charges == 4:
 
@@ -378,8 +332,6 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 28:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
-
                         detail_date[key] = charge_data[i]
                     elif i == 30:
                         key  = 'case_number' + str(charge_key_counter)
@@ -404,33 +356,29 @@ def parseTarget(html_pages):
                     elif i == 40:
                         key  = 'obts' + str(charge_key_counter)
 
-=======
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 30:
                         key  = 'case_number' + str(charge_key_counter)
-                      
+
                         detail_date[key] = charge_data[i]
                     elif i == 32:
                         key  = 'bond_assessed' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 34:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 36:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 38:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
+
                         detail_date[key] = charge_data[i]
                     elif i == 40:
                         key  = 'obts' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
 
                         charge_key_counter+=1
@@ -448,55 +396,39 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 49:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
-
                         detail_date[key] = charge_data[i]
                     elif i == 51:
                         key  = 'case_number' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 53:
                         key  = 'bond_assessed' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 55:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 57:
                         key  = 'charge_status' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 59:
                         key  = 'arrest_type' + str(charge_key_counter)
-
-=======
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 51:
                         key  = 'case_number' + str(charge_key_counter)
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 53:
                         key  = 'bond_assessed' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 55:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 57:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 59:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
                     elif i == 61:
                         detail_date['obts'] = charge_data[i]
-
                         charge_key_counter += 1
 
                         i = 62
@@ -512,20 +444,15 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 70:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
-
                         detail_date[key] = charge_data[i]
                     elif i == 72:
                         key  = 'case_number' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 74:
                         key  = 'bond_assessed' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 76:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 78:
                         key  = 'charge_status' + str(charge_key_counter)
@@ -533,38 +460,27 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 80:
                         key  = 'arrest_type' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 82:
                         key  = 'obts' + str(charge_key_counter)
-
-=======
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 72:
                         key  = 'case_number' + str(charge_key_counter)
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 74:
                         key  = 'bond_assessed' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 76:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 78:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 80:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 82:
                         key  = 'obts' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
 
                         charge_key_counter+= 1
@@ -574,11 +490,7 @@ def parseTarget(html_pages):
             elif number_of_charges == 5:
 
                 i = 22
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                 while i < 104:
 
                     if i == 22:
@@ -592,59 +504,42 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 28:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
-
                         detail_date[key] = charge_data[i]
                     elif i == 30:
                         key  = 'case_number' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 32:
                         key  = 'bond_assessed' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 34:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 36:
                         key  = 'charge_status' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 38:
                         key  = 'arrest_type' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 40:
                         key  = 'obts' + str(charge_key_counter)
-
-=======
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 30:
                         key  = 'case_number' + str(charge_key_counter)
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 32:
                         key  = 'bond_assessed' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 34:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 36:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 38:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 40:
                         key  = 'obts' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
 
                         charge_key_counter+=1
@@ -662,51 +557,36 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 49:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
-
                         detail_date[key] = charge_data[i]
                     elif i == 51:
                         key  = 'case_number' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 53:
                         key  = 'bond_assessed' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 55:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 57:
                         key  = 'charge_status' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 59:
                         key  = 'arrest_type' + str(charge_key_counter)
-
-=======
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 51:
                         key  = 'case_number' + str(charge_key_counter)
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 53:
                         key  = 'bond_assessed' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 55:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 57:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 59:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
                     elif i == 61:
                         detail_date['obts'] = charge_data[i]
@@ -727,59 +607,42 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 70:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
-
                         detail_date[key] = charge_data[i]
                     elif i == 72:
                         key  = 'case_number' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 74:
                         key  = 'bond_assessed' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 76:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 78:
                         key  = 'charge_status' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 80:
                         key  = 'arrest_type' + str(charge_key_counter)
-
                         detail_date[key] = charge_data[i]
                     elif i == 82:
                         key  = 'obts' + str(charge_key_counter)
-
-=======
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 72:
                         key  = 'case_number' + str(charge_key_counter)
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 74:
                         key  = 'bond_assessed' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 76:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 78:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 80:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
                         detail_date[key] = charge_data[i]
                     elif i == 82:
                         key  = 'obts' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
 
                         charge_key_counter+= 1
@@ -798,25 +661,18 @@ def parseTarget(html_pages):
                         detail_date[key] = charge_data[i]
                     elif i == 91:
                         key  = 'statute' + str(charge_key_counter)
-<<<<<<< HEAD
+                        detail_date[key] = charge_data[i]
+                    elif i == 93:
+                        key  = 'case_number' + str(charge_key_counter)
 
                         detail_date[key] = charge_data[i]
                     elif i == 93:
                         key  = 'case_number' + str(charge_key_counter)
 
-=======
-                      
-                        detail_date[key] = charge_data[i]
-                    elif i == 93:
-                        key  = 'case_number' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
 
                     elif i == 95:
                         key  = 'bond_assessed' + str(charge_key_counter)
-<<<<<<< HEAD
-
                         detail_date[key] = charge_data[i]
                     elif i == 97:
                         key  = 'bond_amount_due' + str(charge_key_counter)
@@ -833,25 +689,21 @@ def parseTarget(html_pages):
                     elif i == 103:
                         key  = 'obts' + str(charge_key_counter)
 
-=======
-                        
                         detail_date[key] = charge_data[i]
                     elif i == 97:
                         key  = 'bond_amount_due' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 99:
                         key  = 'charge_status' + str(charge_key_counter)
-                        
+
                         detail_date[key] = charge_data[i]
                     elif i == 101:
                         key  = 'arrest_type' + str(charge_key_counter)
-                      
+
                         detail_date[key] = charge_data[i]
                     elif i == 103:
                         key  = 'obts' + str(charge_key_counter)
-                      
->>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
                         detail_date[key] = charge_data[i]
 
                     i +=2
@@ -863,4 +715,6 @@ def parseTarget(html_pages):
     print("It took this long to process IDs in parsetarget : ", length)
 
     return master_data
+
+
 
