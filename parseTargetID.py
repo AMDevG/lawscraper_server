@@ -12,6 +12,8 @@ def parseTarget(html_pages):
 
     for key, val in html_pages.iteritems():
 
+        print("Beginning to process HTML Pages")
+
         detail_date = {}
     	results = []
     	charge_rows = []
@@ -78,9 +80,6 @@ def parseTarget(html_pages):
     	for row in rows:
     		charge_data.append(row.text)
 
-    	if len(charge_data) > 19:
-    	    number_of_charges = len(charge_data)/21
-    	    print("The Offender has : " + str(number_of_charges) + " charges")
 
     	for i in range(1, len(charge_data),2):
             if i == 1:
@@ -103,10 +102,475 @@ def parseTarget(html_pages):
             	detail_date['arrest_type'] = charge_data[i]
             elif i == 19:
             	detail_date['obts'] = charge_data[i]
+
+
+        if len(charge_data) > 19:
+            number_of_charges = len(charge_data)/21
+            print("The Offender has : " + str(number_of_charges) + " charges")
+
+            charge_key_counter = 2
+
+            if number_of_charges == 2:
+
+                i = 22
+
+                while i < 41:
+
+                    if i == 22:
+                        key = 'charge_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 24:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 26:
+                        key  = 'offense' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 28:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 30:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 32:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 34:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 36:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 38:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 40:
+                        key  = 'obts' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+
+                        charge_key_counter+=1
+
+                    i += 2
+
+
+
+            elif number_of_charges == 3:
+
+                i = 22
+
+                while i < 62:
+
+                    if i == 22:
+                        key = 'charge_number' + str(charge_key_counter)
+                        print("In second charge : Here is the number ", charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 24:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 26:
+                        key  = 'offense' + str(charge_key_counter)
+                        print("here is the sec offense and key : ", key)
+                        print(charge_data[i])
+                        detail_date[key] = charge_data[i]
+                    elif i == 28:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 30:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 32:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 34:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 36:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 38:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 40:
+                        key  = 'obts' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+
+                        charge_key_counter+=1
+
+                        print("Just increased key counter ", charge_key_counter)
+
+                        i = 41
+
+                        print ("I is at ", i)
+
+
+                    elif i == 43:
+                        print("i is at ", i)
+
+                        key = 'charge_number' + str(charge_key_counter)
+                        print ("Third charge num should be Charge_number3")
+                        print ("It is ", key)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 45:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 47:
+                        key  = 'offense' + str(charge_key_counter)
+                        print("here is 3rd offense ", charge_data[i])
+                        detail_date[key] = charge_data[i]
+                    elif i == 49:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 51:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 53:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 55:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 57:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 59:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 61:
+                        detail_date['obts'] = charge_data[i]
+
+                        charge_key_counter += 1
+
+                    i += 2
+                    print i
+
+            elif number_of_charges == 4:
+
+                i = 22
+
+                while i < 83:
+
+                    if i == 22:
+                        key = 'charge_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 24:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 26:
+                        key  = 'offense' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 28:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 30:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 32:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 34:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 36:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 38:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 40:
+                        key  = 'obts' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+
+                        charge_key_counter+=1
+
+                        i = 41
+
+                    elif i == 43:
+                        key = 'charge_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 45:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 47:
+                        key  = 'offense' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 49:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 51:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 53:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 55:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 57:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 59:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 61:
+                        detail_date['obts'] = charge_data[i]
+
+                        charge_key_counter += 1
+
+                        i = 62
+
+                    if i == 64:
+                        key = 'charge_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 66:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 68:
+                        key  = 'offense' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 70:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 72:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 74:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 76:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 78:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 80:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 82:
+                        key  = 'obts' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+
+                        charge_key_counter+= 1
+
+                    i += 2
+
+            elif number_of_charges == 5:
+
+                i = 22
+
+                while i < 104:
+
+                    if i == 22:
+                        key = 'charge_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 24:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 26:
+                        key  = 'offense' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 28:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 30:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 32:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 34:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 36:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 38:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 40:
+                        key  = 'obts' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+
+                        charge_key_counter+=1
+
+                        i = 41
+
+                    elif i == 43:
+                        key = 'charge_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 45:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 47:
+                        key  = 'offense' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 49:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 51:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 53:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 55:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 57:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 59:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 61:
+                        detail_date['obts'] = charge_data[i]
+
+                        charge_key_counter += 1
+
+                        i = 62
+
+
+                    if i == 64:
+                        key = 'charge_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 66:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 68:
+                        key  = 'offense' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 70:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 72:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 74:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 76:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 78:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 80:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 82:
+                        key  = 'obts' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+
+                        charge_key_counter+= 1
+
+                        i = 83
+
+
+                    if i == 85:
+                        key = 'charge_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 87:
+                        key  = 'agency_report_number' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 89:
+                        key  = 'offense' + str(charge_key_counter)
+                        detail_date[key] = charge_data[i]
+                    elif i == 91:
+                        key  = 'statute' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 93:
+                        key  = 'case_number' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+
+                    elif i == 95:
+                        key  = 'bond_assessed' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 97:
+                        key  = 'bond_amount_due' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 99:
+                        key  = 'charge_status' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 101:
+                        key  = 'arrest_type' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+                    elif i == 103:
+                        key  = 'obts' + str(charge_key_counter)
+
+                        detail_date[key] = charge_data[i]
+
+                    i +=2
+
         master_data[docket] = detail_date
 
     stop = time.time()
     length = int(stop - start)
     print("It took this long to process IDs in parsetarget : ", length)
+
     return master_data
 

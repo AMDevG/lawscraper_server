@@ -19,14 +19,18 @@ def getIDs():
     mo = str(day_today[5:7])
     day = str(day_today[8:11])
 
-    #day_today = mo+"/"+day+"/"+year
-    day_today = "10/31/2016"
+    day_today = mo+"/"+day+"/"+year
+
+    print("Gathering for this day: ", day_today)
+    #day_today = "10/31/2016"
 
     display = Display(visible=0, size=(800,600))
     display.start()
     driver = webdriver.Firefox()
 
     driver.get('http://www.pcsoweb.com/InmateBooking/')
+
+
     date_input = driver.find_element_by_id("txtBookingDate")
     search_button = driver.find_element_by_id("btnSearch")
     page_size = Select(driver.find_element_by_id("drpPageSize"))
@@ -38,12 +42,25 @@ def getIDs():
     sort_selection = Select(driver.find_element_by_id("drpSortBy"))
     sort_selection.select_by_value('Docket')
 
+    time.sleep(1)
+
+    print("Driver load success and is at ", driver.title)
+
     response = driver.page_source
     soup = BeautifulSoup(response)
+
+    time.sleep(1)
+
     inmate_numbers = soup.findAll("span", {"id" : re.compile('lblJMSNumber.*')})
+
+
 
     for num in inmate_numbers:
     	search_ids.append(num.text)
+
+    if len(search_ids) < 20:
+        print("Error gathering data!")
+        driver.save_screenshot('/home/lawscraper/screenshots/error.png')
 
     driver.quit()
     display.stop()
@@ -52,6 +69,8 @@ def getIDs():
     length = int(stop-start)
 
     print("Get IDs ran for seconds: ", length)
+
+
     return search_ids
 
 
@@ -59,6 +78,14 @@ def get_id_detail():
     html_dict = {}
 
     test_ids = getIDs()
+
+    print("Gathered test_ids : ")
+    for i in test_ids:
+        print i
+
+    # test_ids = []
+    # test_ids.append("1698579")
+
     display = Display(visible=0, size=(800,600))
     display.start()
     driver = webdriver.Firefox()
