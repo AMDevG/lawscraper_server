@@ -17,7 +17,7 @@ from django.core.mail import send_mail, EmailMessage
 
 def email_attachment():
     mail = EmailMessage("New Booking Report Statement", "testemail", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
-    mail.attach_file("/home/lawscraper/reports/Booking Statement Report.xlsx")
+    mail.attach_file("/Users/johnberry/Desktop/BookingStatementReports/Booking Statement Report.xlsx")
     mail.send()
     print("sent mail!")
 

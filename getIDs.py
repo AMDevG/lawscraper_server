@@ -26,7 +26,7 @@ def getIDs():
 
     display = Display(visible=0, size=(800,600))
     display.start()
-    driver = webdriver.Firefox()
+    driver = webdriver.Chrome()
 
     driver.get('http://www.pcsoweb.com/InmateBooking/')
 
@@ -78,17 +78,21 @@ def get_id_detail():
     html_dict = {}
 
     test_ids = getIDs()
+<<<<<<< HEAD
 
     print("Gathered test_ids : ")
     for i in test_ids:
         print i
 
+=======
+    
+>>>>>>> edfe8dd14ae19948c06043de9d2ddba209850be8
     # test_ids = []
     # test_ids.append("1698579")
 
     display = Display(visible=0, size=(800,600))
     display.start()
-    driver = webdriver.Firefox()
+    driver = webdriver.Chrome()
 
     for ID in test_ids:
         base_url = 'http://www.pcsoweb.com/inmatebooking/SubjectResults.aspx?id='
