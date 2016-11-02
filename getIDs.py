@@ -3,7 +3,7 @@ import re
 import time
 from bs4 import BeautifulSoup
 
-import selenium4
+#import selenium4
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
@@ -54,7 +54,7 @@ def getIDs():
     if len(search_ids) == 0:
         print("Error gathering data!")
         driver.save_screenshot('/home/lawscraper/screenshots/error.png')
-        selenium4.error_handler()
+        #selenium4.error_handler()
 
     driver.quit()
     display.stop()

@@ -6,6 +6,10 @@ import getIDs
 import parseTargetID
 import excelWriter
 
+from parseTargetID import parseTarget
+from getIDs import runParser
+from excelWriter import write_to_excel
+
 def email_attachment():
     mail = EmailMessage("New Booking Report Statement", "testemail", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
     mail.attach_file("/home/lawscraper/reports/Booking Statement Report.xlsx")
