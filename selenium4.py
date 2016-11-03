@@ -11,7 +11,7 @@ from getIDs import runParser
 from excelWriter import write_to_excel
 
 def email_attachment():
-    mail = EmailMessage("New Booking Report Statement", "testemail", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
+    mail = EmailMessage("New Booking Report Statement", "", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
     mail.attach_file("/home/lawscraper/reports/Booking Statement Report.xlsx")
     mail.send()
     print("sent mail!")
@@ -26,7 +26,6 @@ def main():
     html_pages = getIDs.runParser()
     arrest_data = parseTargetID.parseTarget(html_pages)
     excelWriter.write_to_excel(arrest_data)
-    email_attachment()
 
 main()
 

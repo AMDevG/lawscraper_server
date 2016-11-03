@@ -1,5 +1,12 @@
+import os
+
 from openpyxl import Workbook
 from openpyxl.cell import get_column_letter
+from openpyxl.styles import Alignment
+import datetime
+
+from django.core.mail import send_mail, EmailMessage
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pcos_site.settings')
 
 def write_to_excel(detail_data):
 
@@ -26,7 +33,12 @@ def write_to_excel(detail_data):
 
     for i in range(1, 101):
         col_letter = get_column_letter(i)
-        target_ws.column_dimensions[col_letter].width = 20
+        target_ws.column_dimensions[col_letter].width = 30
+
+    for col in target_ws.columns:
+        for cell in col:
+            alignment_obj = cell.alignment.copy(horizontal='center', vertical='center')
+            cell.alignment = alignment_obj
 
     counter = 1
     for item in data_rows:
@@ -416,5 +428,17 @@ def write_to_excel(detail_data):
                 except:
                     target_ws.cell(row = i, column = col_counter ).value = "-"
 
-    workbook_name = "Booking Statement Report.xlsx"
+    date_day = datetime.date.today()
+    date_day = date_day - datetime.timedelta(hours=5)
+    date_day = str(date_day)
+    workbook_name = "Booking Statement Report" + date_day + ".xlsx"
+
+    del_sheet = target_wb.get_sheet_by_name('Sheet')
+    target_wb.remove_sheet(del_sheet)
+
     target_wb.save("/home/lawscraper/reports/"+workbook_name)
+
+    mail = EmailMessage("New Booking Report Statement", "", 'bprecosheet@gmail.com', ['jeberry308@gmail.com', 'js@dedicateddefense.com', 'ls@dedicateddefense.com'])
+    mail.attach_file("/home/lawscraper/reports/"+workbook_name)
+    mail.send()
+    print("sent mail!")
