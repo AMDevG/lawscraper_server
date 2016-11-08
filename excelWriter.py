@@ -428,8 +428,8 @@ def write_to_excel(detail_data):
                 except:
                     target_ws.cell(row = i, column = col_counter ).value = "-"
 
-    date_day = datetime.date.today()
-    date_day = date_day - datetime.timedelta(hours=5)
+    day_day = datetime.date.today()
+    date_day = day_day - datetime.timedelta(hours=6)
     date_day = str(date_day)
     workbook_name = "Booking Statement Report" + date_day + ".xlsx"
 
@@ -438,7 +438,9 @@ def write_to_excel(detail_data):
 
     target_wb.save("/home/lawscraper/reports/"+workbook_name)
 
-    mail = EmailMessage("New Booking Report Statement", "", 'bprecosheet@gmail.com', ['jeberry308@gmail.com', 'js@dedicateddefense.com', 'ls@dedicateddefense.com'])
+    #mail = EmailMessage("New Booking Report Statement", "", 'bprecosheet@gmail.com', ['jeberry308@gmail.com', 'js@dedicateddefense.com', 'ls@dedicateddefense.com'])
+
+    mail = EmailMessage("New Booking Report Statement", "", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
     mail.attach_file("/home/lawscraper/reports/"+workbook_name)
     mail.send()
     print("sent mail!")

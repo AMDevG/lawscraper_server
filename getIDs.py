@@ -13,7 +13,7 @@ from pyvirtualdisplay import Display
 def getIDs():
     search_ids = []
     x = datetime.datetime.now()
-    day_today = x - datetime.timedelta(hours=5)
+    day_today = x - datetime.timedelta(hours=6)
 
     day_today = str(day_today)
     year = str(day_today[0:4])
@@ -65,9 +65,16 @@ def get_id_detail():
     html_dict = {}
     test_ids = getIDs()
 
-    display = Display(visible=0, size=(800,600))
-    display.start()
-    driver = webdriver.Firefox()
+    try:
+        display = Display(visible=0, size=(800,600))
+        display.start()
+        driver = webdriver.Firefox()
+    except:
+        print("Error Starting Driver on ID Gathering")
+        driver.quit()
+        display.stop()
+        print("Calling Again!")
+        get_id_detail()
 
     for ID in test_ids:
         base_url = 'http://www.pcsoweb.com/inmatebooking/SubjectResults.aspx?id='
@@ -78,9 +85,12 @@ def get_id_detail():
 
     driver.quit()
     display.stop()
+
     return html_dict
 
 def runParser():
+
     html_pages = get_id_detail()
+
     return html_pages
 
