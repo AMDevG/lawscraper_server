@@ -2,12 +2,19 @@ import datetime
 import re
 import time
 from bs4 import BeautifulSoup
-
-#import selenium4
+from twilio.rest import TwilioRestClient
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from pyvirtualdisplay import Display
+
+def textMe():
+    accountSID = 'ACe9203e47e2250788094f00add6fd80e4'
+    authToken = 'fa7a2fbee81d6244aa90faa50b001978'
+    twilioCli = TwilioRestClient(accountSID, authToken)
+    myTwilioNumber = '+12162825543'
+    cell = '+12169734568'
+    message = twilioCli.messages.create(body='There was an error starting web driver!', from_=myTwilioNumber, to=cell)
 
 
 def getIDs():
@@ -74,6 +81,7 @@ def get_id_detail():
         driver.quit()
         display.stop()
         print("Calling Again!")
+        textMe()
         get_id_detail()
 
     for ID in test_ids:
@@ -89,8 +97,6 @@ def get_id_detail():
     return html_dict
 
 def runParser():
-
     html_pages = get_id_detail()
-
     return html_pages
 

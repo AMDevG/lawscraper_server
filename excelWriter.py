@@ -438,9 +438,9 @@ def write_to_excel(detail_data):
 
     target_wb.save("/home/lawscraper/reports/"+workbook_name)
 
-    #mail = EmailMessage("New Booking Report Statement", "", 'bprecosheet@gmail.com', ['jeberry308@gmail.com', 'js@dedicateddefense.com', 'ls@dedicateddefense.com'])
+    mail = EmailMessage("New Booking Report Statement", "", 'bprecosheet@gmail.com', ['jeberry308@gmail.com', 'js@dedicateddefense.com', 'ls@dedicateddefense.com'])
 
-    mail = EmailMessage("New Booking Report Statement", "", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
+    #mail = EmailMessage("New Booking Report Statement", "", 'bprecosheet@gmail.com', ['jeberry308@gmail.com'])
     mail.attach_file("/home/lawscraper/reports/"+workbook_name)
     mail.send()
     print("sent mail!")
