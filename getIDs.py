@@ -31,7 +31,7 @@ def getIDs():
 
     display = Display(visible=0, size=(800,600))
     display.start()
-    driver = webdriver.Chrome()
+    driver = webdriver.Firefox()
     driver.get('http://www.pcsoweb.com/InmateBooking/')
 
     date_input = driver.find_element_by_id("txtBookingDate")
@@ -75,7 +75,7 @@ def get_id_detail():
     try:
         display = Display(visible=0, size=(800,600))
         display.start()
-        driver = webdriver.Chrome()
+        driver = webdriver.Firefox()
     except:
         print("Error Starting Driver on ID Gathering")
         driver.quit()
