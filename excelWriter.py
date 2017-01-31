@@ -11,7 +11,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pcos_site.settings')
 def write_to_excel(detail_data):
 
     target_wb = Workbook()
-    data_rows = ['Name', 'Arrest Date', 'Agency',
+    data_rows = ['Last', 'First', 'Middle', 'Arrest Date', 'Agency',
     			 'Address', 'City','State','Zipcode',
     			 'Date of Birth', 'Place of Birth', 'Arrest Age',
     			 'Cell Location', 'Booking Type', 'Offense',
@@ -47,92 +47,121 @@ def write_to_excel(detail_data):
     for key in detail_data.keys():
         col_counter +=1
         for i in range(1,len(data_rows)):
+            name_string = detail_data[key]['name']
+            comma_index = name_string.index(",")
+            last_name = name_string[:comma_index]
+            last_name = last_name.lower().capitalize()
+
+            first_middleName = name_string[comma_index + 1::]
+            first_middleName = first_middleName.strip()
+            nameArray = first_middleName.partition(" ")
+
+            if nameArray[0] != " ":
+                first_name = nameArray[0]
+                first_name = first_name.lower().capitalize()
+            if nameArray[2] != " ":
+                middle_name = nameArray[2]
+                middle_name = middle_name.lower().capitalize()
+
             if i == 1:
                 try:
-            	    target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['name']
+            	    target_ws.cell(row = col_counter, column = i ).value = last_name
                 except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
+
             elif i == 2:
+                try:
+                	target_ws.cell(row = col_counter, column = i ).value = first_name
+            	except:
+            	    target_ws.cell(row = col_counter, column = i ).value = "-"
+
+            elif i == 3:
+                try:
+                	target_ws.cell(row = col_counter, column = i ).value = middle_name
+            	except:
+            	    target_ws.cell(row = col_counter, column = i ).value = "-"
+
+            elif i == 4:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['arrest_date']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 3:
+            elif i == 5:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['agency']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 4:
+            elif i == 6:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['address']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 5:
+            elif i == 7:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['city']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 6:
+            elif i == 8:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['state']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 7:
+            elif i == 9:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['zipcode']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 8:
+            elif i == 10:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['dob']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 9:
+            elif i == 11:
                 try:
             	    target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['pob']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 10:
+            elif i == 12:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['arrest_age']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 11:
+            elif i == 13:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['cell_location']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 12:
+            elif i == 14:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['booking_type']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 13:
+            elif i == 15:
                 try:
                 	target_ws.cell(row = col_counter , column = i ).value = detail_data[key]['offense']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 14:
+            elif i == 16:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['statute']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 15:
+            elif i == 17:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_assessed']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 16:
+            elif i == 18:
                 try:
                 	target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_amount_due']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 17:
+            elif i == 19:
                 try:
             	    target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['charge_status']
             	except:
             	    target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 18:
+            elif i == 20:
                 try:
             	    target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['arrest_type']
             	except:
@@ -141,32 +170,32 @@ def write_to_excel(detail_data):
 
         ##### CHARGE 2 ######
 
-            elif i == 19:
+            elif i == 21:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['offense2']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 20:
+            elif i == 22:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['statute2']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 21:
+            elif i == 23:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_assessed2']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 22:
+            elif i == 24:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_amount_due2']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 23:
+            elif i == 25:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['charge_status2']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 24:
+            elif i == 26:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['arrest_type2']
                 except:
@@ -174,64 +203,64 @@ def write_to_excel(detail_data):
 
         ### CHARGE 3 #####
 
-            elif i == 25:
+            elif i == 27:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['offense3']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 26:
+            elif i == 28:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['statute3']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 27:
+            elif i == 29:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_assessed3']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 28:
+            elif i == 30:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_amount_due3']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 29:
+            elif i == 31:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['charge_status3']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 30:
+            elif i == 32:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['arrest_type3']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
 
             ##### CHARGE 4 ####
-            elif i == 31:
+            elif i == 33:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['offense4']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 32:
+            elif i == 34:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['statute4']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 33:
+            elif i == 35:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_assessed4']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 34:
+            elif i == 36:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_amount_due4']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 35:
+            elif i == 37:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['charge_status4']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 36:
+            elif i == 38:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['arrest_type4']
                 except:
@@ -239,32 +268,32 @@ def write_to_excel(detail_data):
 
         ##### CHARGE 5 #####
 
-            elif i == 37:
+            elif i == 39:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['offense5']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 38:
+            elif i == 40:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['statute5']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 39:
+            elif i == 41:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_assessed5']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 40:
+            elif i == 42:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['bond_amount_due5']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 41:
+            elif i == 43:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['charge_status5']
                 except:
                     target_ws.cell(row = col_counter, column = i ).value = "-"
-            elif i == 42:
+            elif i == 45:
                 try:
                     target_ws.cell(row = col_counter, column = i ).value = detail_data[key]['arrest_type5']
                 except:
